@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CricketersFavourite</title>
+  <style>
+    body{margin:0;font-family:Arial;background:#f4f6f8}
+    header{background:#0b3d2e;color:#fff;padding:15px;position:sticky;top:0}
+    header h1{margin:0}
+    nav{margin-top:10px}
+    nav a{color:#fff;margin-right:15px;text-decoration:none;font-weight:bold}
+    .section{padding:25px}
+    h2{color:#0b3d2e}
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+    .card{background:#fff;border-radius:10px;padding:15px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center}
+    .card img{width:100%;height:120px;object-fit:contain}
+    .price{color:green;font-weight:bold}
+    .old{color:red;text-decoration:line-through;font-size:13px}
+    button{background:#0b3d2e;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+    footer{background:#0b3d2e;color:#fff;text-align:center;padding:10px;margin-top:20px}
+    #cart{position:fixed;bottom:15px;right:15px;background:#0b3d2e;color:#fff;padding:12px;border-radius:50%}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🏏 CricketersFavourite</h1>
+  <nav>
+    <a href="#batting">Batting</a>
+    <a href="#bowling">Bowling</a>
+    <a href="#keeping">Keeping</a>
+    <a href="#checkout">Checkout</a>
+  </nav>
+</header>
+
+<section class="section" id="batting">
+  <h2>Batting Equipment</h2>
+  <div class="products">
+    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972291.png"><h3>Bat</h3><p class="old">₹4,999</p><p class="price">₹3,999</p><button onclick="addToCart('Bat',3999)">Add</button></div>
+    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972297.png"><h3>Gloves</h3><p class="old">₹1,999</p><p class="price">₹1,499</p><button onclick="addToCart('Gloves',1499)">Add</button></div>
+    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972298.png"><h3>Pads</h3><p class="old">₹2,499</p><p class="price">₹1,999</p><button onclick="addToCart('Pads',1999)">Add</button></div>
+  </div>
+</section>
+
+<section class="section" id="bowling">
+  <h2>Bowling Equipment</h2>
+  <div class="products">
+    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972294.png"><h3>Ball</h3><p class="old">₹699</p><p class="price">₹549</p><button onclick="addToCart('Ball',549)">Add</button></div>
+    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972304.png"><h3>Shoes</h3><p class="old">₹3,499</p><p class="price">₹2,799</p><button onclick="addToCart('Shoes',2799)">Add</button></div>
+  </div>
+</section>
+
+<section class="section" id="keeping">
+  <h2>Keeping Equipment</h2>
+  <div class="products">
+    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972303.png"><h3>Keeping Gloves</h3><p class="old">₹2,199</p><p class="price">₹1,799</p><button onclick="addToCart('Keeping Gloves',1799)">Add</button></div>
+    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972302.png"><h3>Keeping Pads</h3><p class="old">₹2,499</p><p class="price">₹2,099</p><button onclick="addToCart('Keeping Pads',2099)">Add</button></div>
+  </div>
+</section>
+
+<section class="section" id="checkout">
+  <h2>Checkout</h2>
+  <p id="cartItems">No items yet</p>
+  <h3 id="total">Total: ₹0</h3>
+</section>
+
+<div id="cart">🛒</div>
+
+<footer>
+  © 2026 CricketersFavourite | Built like a Mobile App
+</footer>
+
+<script>
+  let total=0;let items=[];
+  function addToCart(name,price){items.push(name);total+=price;document.getElementById('cartItems').innerText='Items: '+items.join(', ');document.getElementById('total').innerText='Total: ₹'+total;}
+</script>
+</body>
+</html>
