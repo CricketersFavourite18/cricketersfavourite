@@ -1,78 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CricketersFavourite</title>
   <style>
-    body{margin:0;font-family:Arial;background:#f4f6f8}
-    header{background:#0b3d2e;color:#fff;padding:15px;position:sticky;top:0}
-    header h1{margin:0}
-    nav{margin-top:10px}
-    nav a{color:#fff;margin-right:15px;text-decoration:none;font-weight:bold}
-    .section{padding:25px}
-    h2{color:#0b3d2e}
-    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
-    .card{background:#fff;border-radius:10px;padding:15px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center}
-    .card img{width:100%;height:120px;object-fit:contain}
-    .price{color:green;font-weight:bold}
-    .old{color:red;text-decoration:line-through;font-size:13px}
-    button{background:#0b3d2e;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
-    footer{background:#0b3d2e;color:#fff;text-align:center;padding:10px;margin-top:20px}
-    #cart{position:fixed;bottom:15px;right:15px;background:#0b3d2e;color:#fff;padding:12px;border-radius:50%}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background: #f5f5f5; color: #333; }
+
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #2563eb;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 10px 20px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover { color: #ffdd57; }
+
+    section { padding: 30px 20px; }
+    section h2 { text-align: center; margin-bottom: 20px; color: #1e3a8a; }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+      width: 100%;
+      max-width: 250px;
+    }
+    .card:hover { transform: translateY(-5px); }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .card h3 { margin: 10px 0; }
+    .price { font-size: 18px; font-weight: bold; color: #16a34a; }
+    .discount { text-decoration: line-through; color: #ef4444; font-size: 14px; margin-left: 8px; }
+    .btn {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #1e40af; }
+
+    .checkout {
+      display: block;
+      width: 200px;
+      margin: 30px auto;
+      padding: 15px;
+      background: #16a34a;
+      color: white;
+      font-size: 18px;
+      text-align: center;
+      border-radius: 12px;
+      text-decoration: none;
+    }
+    .checkout:hover { background: #15803d; }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #1e3a8a;
+      color: white;
+      margin-top: 30px;
+    }
+
+    .cart-total {
+      text-align: center;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    @media(max-width: 600px){
+      nav { flex-direction: column; }
+      nav a { margin: 10px 0; }
+    }
   </style>
 </head>
 <body>
-<header>
-  <h1>🏏 CricketersFavourite</h1>
+
+  <header>CricketersFavourite</header>
+
   <nav>
     <a href="#batting">Batting</a>
     <a href="#bowling">Bowling</a>
     <a href="#keeping">Keeping</a>
-    <a href="#checkout">Checkout</a>
   </nav>
-</header>
 
-<section class="section" id="batting">
-  <h2>Batting Equipment</h2>
-  <div class="products">
-    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972291.png"><h3>Bat</h3><p class="old">₹4,999</p><p class="price">₹3,999</p><button onclick="addToCart('Bat',3999)">Add</button></div>
-    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972297.png"><h3>Gloves</h3><p class="old">₹1,999</p><p class="price">₹1,499</p><button onclick="addToCart('Gloves',1499)">Add</button></div>
-    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972298.png"><h3>Pads</h3><p class="old">₹2,499</p><p class="price">₹1,999</p><button onclick="addToCart('Pads',1999)">Add</button></div>
-  </div>
-</section>
+  <div class="cart-total">Cart Total: ₹<span id="cartTotal">0</span></div>
 
-<section class="section" id="bowling">
-  <h2>Bowling Equipment</h2>
-  <div class="products">
-    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972294.png"><h3>Ball</h3><p class="old">₹699</p><p class="price">₹549</p><button onclick="addToCart('Ball',549)">Add</button></div>
-    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972304.png"><h3>Shoes</h3><p class="old">₹3,499</p><p class="price">₹2,799</p><button onclick="addToCart('Shoes',2799)">Add</button></div>
-  </div>
-</section>
+  <!-- Batting Section -->
+  <section id="batting">
+    <h2>Batting Gear</h2>
+    <div class="products">
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150?text=Bat" alt="Cricket Bat">
+        <h3>Classic Bat</h3>
+        <div>
+          <span class="price">2500</span>
+          <span class="discount">3000</span>
+        </div>
+        <button class="btn" onclick="addToCart(2500)">Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150?text=Premium+Bat" alt="Premium Bat">
+        <h3>Premium Bat</h3>
+        <div>
+          <span class="price">4500</span>
+          <span class="discount">5000</span>
+        </div>
+        <button class="btn" onclick="addToCart(4500)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
 
-<section class="section" id="keeping">
-  <h2>Keeping Equipment</h2>
-  <div class="products">
-    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972303.png"><h3>Keeping Gloves</h3><p class="old">₹2,199</p><p class="price">₹1,799</p><button onclick="addToCart('Keeping Gloves',1799)">Add</button></div>
-    <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/2972/2972302.png"><h3>Keeping Pads</h3><p class="old">₹2,499</p><p class="price">₹2,099</p><button onclick="addToCart('Keeping Pads',2099)">Add</button></div>
-  </div>
-</section>
+  <!-- Bowling Section -->
+  <section id="bowling">
+    <h2>Bowling Gear</h2>
+    <div class="products">
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150?text=Red+Ball" alt="Red Ball">
+        <h3>Red Leather Ball</h3>
+        <div>
+          <span class="price">500</span>
+          <span class="discount">600</span>
+        </div>
+        <button class="btn" onclick="addToCart(500)">Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150?text=White+Ball" alt="White Ball">
+        <h3>White Ball</h3>
+        <div>
+          <span class="price">550</span>
+          <span class="discount">650</span>
+        </div>
+        <button class="btn" onclick="addToCart(550)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
 
-<section class="section" id="checkout">
-  <h2>Checkout</h2>
-  <p id="cartItems">No items yet</p>
-  <h3 id="total">Total: ₹0</h3>
-</section>
+  <!-- Keeping Section -->
+  <section id="keeping">
+    <h2>Keeping Gear</h2>
+    <div class="products">
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150?text=Gloves" alt="Wicket Keeping Gloves">
+        <h3>Gloves</h3>
+        <div>
+          <span class="price">1500</span>
+          <span class="discount">1800</span>
+        </div>
+        <button class="btn" onclick="addToCart(1500)">Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150?text=Pads" alt="Wicket Keeping Pads">
+        <h3>Pads</h3>
+        <div>
+          <span class="price">2000</span>
+          <span class="discount">2300</span>
+        </div>
+        <button class="btn" onclick="addToCart(2000)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
 
-<div id="cart">🛒</div>
+  <a href="#" class="checkout">Go to Checkout</a>
 
-<footer>
-  © 2026 CricketersFavourite | Built like a Mobile App
-</footer>
+  <footer>© 2026 CricketersFavourite</footer>
 
-<script>
-  let total=0;let items=[];
-  function addToCart(name,price){items.push(name);total+=price;document.getElementById('cartItems').innerText='Items: '+items.join(', ');document.getElementById('total').innerText='Total: ₹'+total;}
-</script>
+  <script>
+    let total = 0;
+    function addToCart(price) {
+      total += price;
+      document.getElementById('cartTotal').innerText = total;
+      alert('Added to cart! Cart Total: ₹' + total);
+    }
+  </script>
+
 </body>
 </html>
